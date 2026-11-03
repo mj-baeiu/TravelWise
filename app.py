@@ -86,15 +86,34 @@ def plan_trip():
         "forecast_days": 16
     }
 
+    
     try:
         weather_response = requests.get(
             weather_url,
             params=weather_params,
-            timeout=10
+            timeout=30
         )
+
+        # Log the API response for debugging.
+        app.logger.info(
+            "Open-Meteo status: %s",
+            weather_response.status_code
+        )
+
         weather_response.raise_for_status()
+
         weather_data = weather_response.json()
-        print("WEATHER DATA:", weather_data)
+
+        app.logger.info("Weather data retrieved successfully.")
+
+        if "daily" not in weather_data:
+            app.logger.error(
+                "Open-Meteo response has no daily forecast: %s",
+                weather_data
+            )
+            return jsonify({
+                "error": "Weather forecast data is unavailable."
+            }), 502
 
         try:
             trip_start = datetime.strptime(start_date, "%Y-%m-%d").date()
@@ -136,7 +155,11 @@ def plan_trip():
                 "error": "Invalid travel details or weather data."
             }), 400
 
-    except requests.RequestException:
+    except requests.RequestException as e:
+        app.logger.exception(
+            "Open-Meteo API request failed: %s", e
+        )
+
         return jsonify({
             "error": "Unable to retrieve weather data right now."
         }), 502
