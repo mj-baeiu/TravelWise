@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TravelWise | Smart Travel Planning Assistant</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link rel="icon" type="images/icon" href="../static/images/TravelWiseIcon.png">
+</head>
+<body>
+    <header class="nav-bar">
+        <a href="/" class="logo">
+            <img src="../static/images/TravelWiseLogo.png" alt="TravelWise">
+        </a>
+
+        <nav>
+            <a href="/">Home</a>
+            <a href="#about">About</a>
+            <a href="#contact">Contact</a>
+        </nav>
+    </header>
+
+    <main>
+        <section class="landing">
+            <h1>Plan Your Trip Wisely</h1>
+            <p>Check the weather for your destination and get travel recommendations before you go.</p>
+            <a href="{{ url_for('planner') }}" class="plan-button">Plan Now <span>→</span></a>
+        </section>
+
+        <section id="about" class="info-section">
+            <h2>About TravelWise</h2>
+            <div class="about-content">
+                <div class="about-item">
+                    <h3>How It Started</h3>
+                    <p>
+                        TravelWise began as a college project inspired by
+                        the idea of making travel planning easier, smarter,
+                        and more convenient. We wanted to develop a platform
+                        that helps travelers prepare for their journeys
+                        by providing useful weather information and
+                        travel recommendations in one place.
+                    </p>
+                </div>
+                <div class="about-item">
+                    <h3>Our Purpose</h3>
+                    <p>
+                        The purpose of TravelWise is to help travelers
+                        make informed decisions before and during their trips.
+                        By combining weather forecasts, destination information,
+                        and AI-powered travel assistance, the website aims
+                        to make trip preparation more convenient and organized.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <section id="contact" class="info-section">
+            <h2>Contact Us</h2>
+            <p>
+                Have questions or suggestions? We would love to hear from you.
+            </p>
+            <p>Email: <a href="#" id="email">TravelWise@gmail.com</a></p>
+        </section>
+    </main>
+
+    <footer>
+        <p>© 2026 TravelWise. All Rights Reserved.</p>
+    </footer>
+</body>
+</html>

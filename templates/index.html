@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TravelWise | Plan Your Trip</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link rel="icon" type="images/icon" href="../static/images/TravelWiseIcon.png">
+</head>
+
+<body>
+    <header class="nav-bar">
+        <a href="/" class="logo">
+            <img src="../static/images/TravelWiseLogo.png" alt="TravelWise">
+        </a>
+
+        <nav>
+            <a href="/">Home</a>
+            <a href="/#about">About</a>
+            <a href="/#contact">Contact</a>
+        </nav>
+    </header>
+
+    <main class="planner-page">
+        <h1>Plan Your Trip</h1>
+
+        <section class="glass-panel">
+            <h2>Where are you going?</h2>
+            <p>Enter your destination and travel details below.</p>
+
+            <form id="travel-form">
+                <div class="form-group">
+                    <label for="destination">Destination</label>
+                    <input
+                        type="text"
+                        id="destination"
+                        name="destination"
+                        placeholder="e.g. Baguio City, Philippines"
+                        required
+                    >
+                    <button type="button" id="search-location-btn" class="search-location-btn">
+                        Search Location
+                    </button>
+                    <div id="location-results" class="location-results"></div>
+
+                    <input type="hidden" id="latitude" name="latitude">
+                    <input type="hidden" id="longitude" name="longitude">
+                </div>
+
+                <div class="form-group">
+                    <label for="start-date">Travel Start Date</label>
+                    <input
+                        type="date"
+                        id="start-date"
+                        name="start_date"
+                        required
+                    >
+                </div>
+
+                <div class="form-group">
+                    <label for="duration">How many days will you be staying?</label>
+                    <input
+                        type="number"
+                        id="duration"
+                        name="duration"
+                        min="1"
+                        max="16"
+                        placeholder="e.g. 3"
+                        required
+                    >
+                    <small id="duration-hint" class="duration-hint"></small>
+                </div>
+
+                <button type="submit" class="plan-button">
+                    Check Weather & Plan Trip
+                </button>
+            </form>
+        </section>
+
+        <section class="glass-panel" id="trip-summary" hidden>
+            <h2>✈️ Your Trip Summary</h2>
+
+            <p>
+                <strong>📍 Destination:</strong>
+                <span id="summary-destination"></span>
+            </p>
+
+            <p>
+                <strong>📅 Start Date:</strong>
+                <span id="summary-date"></span>
+            </p>
+
+            <p>
+                <strong>🧳 Duration:</strong>
+                <span id="summary-duration"></span>
+            </p>
+
+            <div class="overall-outlook">
+                <h3>🌤️ Overall Weather Outlook</h3>
+                <p id="summary-outlook"></p>
+            </div>
+        </section>
+
+        <section class="glass-panel" id="weather-section" hidden>
+            <h2>Your Weather Forecast</h2>
+            <p>Here's the weather forecast for your selected travel dates.</p>
+
+            <div id="weather-results" class="weather-results">
+                <!-- JavaScript will generate weather cards here -->
+            </div>
+        </section>
+
+        <div id="chatbot-overlay" hidden></div>
+        <section class="glass-panel" id="chatbot-section" hidden>
+            <button
+                type="button"
+                id="chatbot-close"
+                class="chatbot-close"
+                aria-label="Close TravelWise Assistant"
+            >
+                &times;
+            </button>
+            <h2><img src="{{ url_for('static', filename='images/TravelWiseRobot.png') }}" alt="TravelWise AI" class="chatbot-header-robot"
+            > TravelWise Travel Assistant</h2>
+
+            <p>
+                Ask questions about your destination, weather,
+                travel preparations, or recommended activities.
+            </p>
+
+            <div class="chatbot-conversation">
+                <div id="chat-messages" class="chat-messages">
+                    <div class="chat-message bot-message">👋 Hello! I'm your TravelWise Assistant. Plan your trip, then ask me how to prepare or what activities might suit the weather!</div>
+                </div>
+                
+                <form id="chat-form" class="chat-form">
+                    <input
+                        type="text"
+                        id="chat-input"
+                        placeholder="Ask me about your trip..."
+                        autocomplete="off"
+                        required
+                    >
+
+                    <button type="submit" id="chat-send-btn">
+                        Send
+                    </button>
+                </form>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>© 2026 TravelWise. All Rights Reserved.</p>
+    </footer>
+
+    <!-- Floating TravelWise AI Assistant -->
+    <button
+        id="chatbot-toggle"
+        class="chatbot-toggle"
+        type="button"
+        aria-label="Open TravelWise AI Assistant"
+    >
+        <img
+            src="{{ url_for('static', filename='images/TravelWiseRobot.png') }}"
+            alt="TravelWise Robot"
+        >
+    </button>
+
+    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+</body>
+</html>
